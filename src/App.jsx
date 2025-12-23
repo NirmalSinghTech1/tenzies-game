@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import Die from './components/Die'
 import { nanoid } from 'nanoid'
@@ -17,6 +17,7 @@ function generateAllDice() {
 
 function App() {
   const [dice, setDice] = useState(() => generateAllDice())
+  const focusBtn = useRef(null)
 
   const newGame = dice.every( die => die.isHeld) && dice.every( die => dice[0].value === die.value)
   
@@ -49,8 +50,13 @@ function App() {
     }))
   }
 
+  useEffect(() => {
+    focusBtn.current.focus()
+  }, [newGame])
+
   return (
     <>
+      {newGame && <p aria-live='polite' role='status' className='visually-hidden'>Game finished, to start a new game, press new game button by pressing space or enter key</p>}
       {newGame && <Confetti />}
       <main>
         <h1>Tenzies</h1>
@@ -58,7 +64,13 @@ function App() {
         <div className="dice-container">
           {dieButtons}
         </div>
-        <button className='roll-dice' onClick={rollDice}>{newGame ? "New Game" :"Roll"}</button>
+        <button 
+            aria-label={`${newGame ? "Start a new Game" : "Roll dice"}`}
+            className='roll-dice' 
+            onClick={rollDice}
+            ref={focusBtn}
+          >{newGame ? "New Game" :"Roll"}
+          </button>
       </main>
     </>
   )
