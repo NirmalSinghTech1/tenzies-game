@@ -47,7 +47,8 @@ button:focus-visible {
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
+  outline: none;
 }
 
 @media (prefers-color-scheme: light) {

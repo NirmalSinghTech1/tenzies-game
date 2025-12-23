@@ -1,5 +1,9 @@
 export default function Die(props) {
     return (
-          <button>{props.value}</button>
+        <button 
+            onClick={props.hold}
+            style={{backgroundColor: `${props.isHeld ? "#59E391" : ""}`}}
+            >{props.value}
+        </button>
     )
 }
