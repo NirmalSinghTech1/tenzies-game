@@ -53,6 +53,7 @@ main p {
   margin-top: 1.8em;
   font-size: 1.2rem;
   border-radius: 10px;
-  max-width: 100px;
+  max-width: 160px;
+  white-space: nowrap;
 }
 
